@@ -1,6 +1,6 @@
 import { Categories } from 'src/assets/enums/education-categories-enums';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Community } from './community.entity';
+import { Community } from '../community/community.entity';
 
 @Entity()
 export class Education {
@@ -13,6 +13,8 @@ export class Education {
   @Column({ type: 'enum', enum: Categories })
   category: Categories;
 
-  @ManyToOne(() => Community, (community) => community.education_places)
+  @ManyToOne(() => Community, (community) => community.education_places, {
+    onDelete: 'CASCADE',
+  })
   community: Community;
 }
