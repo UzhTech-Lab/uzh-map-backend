@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Community } from './community.entity';
+import { Community } from '../community/community.entity';
 
 @Entity()
 export class Argiculture {
@@ -12,6 +12,8 @@ export class Argiculture {
   @Column()
   details: string;
 
-  @ManyToOne(() => Community, (community) => community.argiculture_places)
+  @ManyToOne(() => Community, (community) => community.argiculture_places, {
+    onDelete: 'CASCADE',
+  })
   community: Community;
 }

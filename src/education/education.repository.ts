@@ -16,6 +16,16 @@ export class EducationRepository {
     return this.educationRepository.find();
   }
 
+  async findById(id: number): Promise<Education | null> {
+    const argiculture = await this.educationRepository.findOne({
+      where: { id },
+    });
+    if (!argiculture) {
+      throw new NotFoundException('The education not found');
+    }
+    return argiculture;
+  }
+
   async findByCommunityId(id: number): Promise<Education[]> {
     return this.educationRepository.find({
       where: { community: { id } },
@@ -46,12 +56,6 @@ export class EducationRepository {
   }
 
   async deleteEducationPlace(id: number): Promise<void> {
-    const place = await this.educationRepository.findOne({ where: { id } });
-    if (!place) {
-      throw new NotFoundException('Place not found');
-    }
-
     await this.educationRepository.delete(id);
-    return;
   }
 }
