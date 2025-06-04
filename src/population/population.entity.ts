@@ -5,13 +5,15 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Community } from './community.entity';
+import { Community } from '../community/community.entity';
 
 @Entity()
 export class Population {
   @PrimaryGeneratedColumn()
   id: number;
-  @OneToOne(() => Community, (community) => community.population)
+  @OneToOne(() => Community, (community) => community.population, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'community_id' })
   community: Community;
 
