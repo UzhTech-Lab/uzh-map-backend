@@ -27,7 +27,7 @@ export class GeographyService {
   async updateGeography(
     id: number,
     geography: GeographyUpdateDTO,
-  ): Promise<Geography> {
+  ): Promise<Geography | null> {
     return this.geographyRepository.updateGeography(id, geography);
   }
 

@@ -13,7 +13,7 @@ import { Population } from './population.entity';
 import { CreatePopulationDTO } from './dtos/population-create.dto';
 import { PopulationUpdateDTO } from './dtos/population-update.dto';
 
-@Controller('population')
+@Controller('api/v1/population')
 export class PopulationController {
   constructor(private readonly populationService: PopulationService) {}
 
@@ -45,7 +45,7 @@ export class PopulationController {
   async updatePopulation(
     @Param('id', ParseIntPipe) id: number,
     population: PopulationUpdateDTO,
-  ): Promise<Population> {
+  ): Promise<Population | null> {
     try {
       return this.populationService.updatePopulation(id, population);
     } catch (error) {

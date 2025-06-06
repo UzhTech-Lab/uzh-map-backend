@@ -32,7 +32,7 @@ export class PopulationUpdateDTO {
 
   @IsOptional()
   @IsNumber()
-  working_age_percent: number;
+  working_age: number;
 
   @IsOptional()
   @IsInt()

@@ -1,7 +1,7 @@
 export enum Categories {
-  'library',
-  'school',
-  'entertainment',
-  'museum',
-  'kindergarden',
+  library = 'бібліотека',
+  school = 'школа',
+  entertainment = 'розваги',
+  museum = 'музей',
+  kindergarden = 'садочок',
 }

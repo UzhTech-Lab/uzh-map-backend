@@ -2,31 +2,32 @@ import { Injectable } from '@nestjs/common';
 import { Population } from './population.entity';
 import { CreatePopulationDTO } from './dtos/population-create.dto';
 import { PopulationUpdateDTO } from './dtos/population-update.dto';
+import { PopulationRepository } from './population.repository';
 
 @Injectable()
 export class PopulationService {
-  constructor(private readonly populationService: PopulationService) {}
+  constructor(private readonly populationRepository: PopulationRepository) {}
 
   async findAllPopulation(): Promise<Population[]> {
-    return this.populationService.findAllPopulation();
+    return this.populationRepository.findAllPopulation();
   }
 
   async findPopulationByCommunityId(id: number): Promise<Population[]> {
-    return this.populationService.findPopulationByCommunityId(id);
+    return this.populationRepository.findPopulationByCommunityId(id);
   }
 
   async createPopulation(population: CreatePopulationDTO): Promise<Population> {
-    return this.populationService.createPopulation(population);
+    return this.populationRepository.createPopulation(population);
   }
 
   async updatePopulation(
     id: number,
     population: PopulationUpdateDTO,
-  ): Promise<Population> {
-    return this.populationService.updatePopulation(id, population);
+  ): Promise<Population | null> {
+    return this.populationRepository.updatePopulation(id, population);
   }
 
   async deletePopulation(id: number): Promise<void> {
-    await this.populationService.deletePopulation(id);
+    await this.populationRepository.deletePopulation(id);
   }
 }

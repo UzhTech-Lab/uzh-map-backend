@@ -1,4 +1,4 @@
-import { IsEnum, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsString } from 'class-validator';
 import { Categories } from 'src/assets/enums/geography-categories-enums';
 
 export class GeographyCreateDTO {
@@ -7,4 +7,7 @@ export class GeographyCreateDTO {
 
   @IsEnum(Categories)
   category: Categories;
+
+  @IsInt()
+  communityId: number;
 }

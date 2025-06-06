@@ -3,7 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Community } from '../community/community.entity';
@@ -13,7 +13,7 @@ export class Geography {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => Community, (community) => community.geography, {
+  @ManyToOne(() => Community, (community) => community.geography, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'community_id' })

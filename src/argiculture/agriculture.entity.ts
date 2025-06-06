@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Community } from '../community/community.entity';
 
 @Entity()
-export class Argiculture {
+export class Agriculture {
   @PrimaryGeneratedColumn()
   id: number;
 

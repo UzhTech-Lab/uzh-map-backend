@@ -1,15 +1,17 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Education } from './educaiton.entity';
+import { Education } from './education.entity';
 import { Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { EducationCreateDTO } from './dtos/education-create.dto';
 import { EducationUpdateDTO } from './dtos/education-update.dto';
+import { CommunityRepository } from 'src/community/community.repository';
 
 @Injectable()
 export class EducationRepository {
   constructor(
     @InjectRepository(Education)
     private readonly educationRepository: Repository<Education>,
+    private readonly communityRepo: CommunityRepository,
   ) {}
 
   async findAllPlaces(): Promise<Education[]> {
@@ -35,8 +37,21 @@ export class EducationRepository {
   async createEducationPlace(
     educationPlace: EducationCreateDTO,
   ): Promise<Education> {
+    const community = await this.communityRepo.findById(
+      educationPlace.communityId,
+    );
+
+    if (!community) {
+      throw new NotFoundException('Community not found');
+    }
     const place = this.educationRepository.create(educationPlace);
+    place.community = community;
+
     return await this.educationRepository.save(place);
+  }
+
+  async saveEducationPlace(educationPlace: Education): Promise<Education> {
+    return this.educationRepository.save(educationPlace);
   }
 
   async updateEducationPlace(

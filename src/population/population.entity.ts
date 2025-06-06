@@ -24,7 +24,7 @@ export class Population {
   school_age: number;
 
   @Column()
-  working_age_percent: number;
+  working_age: number;
 
   @Column()
   retired: number;

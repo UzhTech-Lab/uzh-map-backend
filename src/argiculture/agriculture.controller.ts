@@ -9,14 +9,14 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ArgicultureService } from './argiculture.service';
-import { ArgicultureCreateDTO } from './dtos/argiculture-create.dto';
-import { Argiculture } from './argiculture.entity';
-import { ArgicultureUpdateDTO } from './dtos/argiculture-update.dto';
+import { AgricultureService } from './agriculture.service';
+import { AgricultureCreateDTO } from './dtos/argiculture-create.dto';
+import { Agriculture } from './agriculture.entity';
+import { AgricultureUpdateDTO } from './dtos/argiculture-update.dto';
 
 @Controller('/api/v1/argiculture')
 export class ArgicultureController {
-  constructor(private readonly argicultureService: ArgicultureService) {}
+  constructor(private readonly argicultureService: AgricultureService) {}
   @Get('/:id')
   getArgicultureByCommunityId(@Param('id', ParseIntPipe) id: number) {
     try {
@@ -30,8 +30,8 @@ export class ArgicultureController {
 
   @Post()
   postArgiculture(
-    @Body() argiculture: ArgicultureCreateDTO,
-  ): Promise<Argiculture> {
+    @Body() argiculture: AgricultureCreateDTO,
+  ): Promise<Agriculture> {
     try {
       return this.argicultureService.createArgiculture(argiculture);
     } catch (error) {
@@ -44,11 +44,11 @@ export class ArgicultureController {
   @Patch('/:id')
   patchArgiculture(
     @Param('id', ParseIntPipe) id: number,
-    @Body() argiculture: ArgicultureUpdateDTO,
-  ): Promise<Argiculture> {
+    @Body() argiculture: AgricultureUpdateDTO,
+  ): Promise<Agriculture | null> {
     try {
       return this.argicultureService.updateAgriculture(id, argiculture);
-    } catch (error) {
+    } catch (error: any) {
       throw new BadRequestException(
         error.message || 'Error during getting argiculture',
       );

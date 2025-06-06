@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Community } from './community.entity';
+import { Community } from '../community/community.entity';
 
 @Entity()
 export class Economy {
@@ -21,7 +21,9 @@ export class Economy {
   @Column()
   enterprises_amount: number;
 
-  @OneToOne(() => Community, (community) => community.economy)
+  @OneToOne(() => Community, (community) => community.economy, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'community_id' })
   community: Community;
 }

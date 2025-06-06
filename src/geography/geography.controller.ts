@@ -45,7 +45,7 @@ export class GeographyController {
   async updateGeorgaphy(
     @Param('id', ParseIntPipe) id: number,
     geography: GeographyUpdateDTO,
-  ): Promise<Geography> {
+  ): Promise<Geography | null> {
     try {
       return this.geographyService.updateGeography(id, geography);
     } catch (error) {

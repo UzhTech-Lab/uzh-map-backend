@@ -3,13 +3,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { Community } from './entities/community.entity';
-import { Geography } from './entities/geography.entity';
-import { Population } from './entities/population.entity';
-import { Argiculture } from './entities/argiculture.entity';
-import { Education } from './entities/educaiton.entity';
-import { Economy } from './entities/economy.entity';
-import { Infrastructure } from './entities/infrastructure.enity';
+import { Community } from './community/community.entity';
+import { Geography } from './geography/geography.entity';
+import { Population } from './population/population.entity';
+import { Agriculture } from './argiculture/agriculture.entity';
+import { Education } from './education/education.entity';
+import { Economy } from './economy/economy.entity';
+import { Infrastructure } from './infrastructure/infrastructure.entity';
+import { CommunityModule } from './community/community.module';
+import { ArgicultureModule } from './argiculture/agriculture.module';
+import { EconomyModule } from './economy/economy.module';
+import { EducationModule } from './education/education.module';
+import { GeographyModule } from './geography/geography.module';
+import { InfrastructureModule } from './infrastructure/infrastructure.module';
+import { PopulationModule } from './population/population.module';
 
 @Module({
   imports: [
@@ -27,14 +34,19 @@ import { Infrastructure } from './entities/infrastructure.enity';
         Community,
         Geography,
         Population,
-        Argiculture,
+        Agriculture,
         Education,
         Economy,
         Infrastructure,
       ],
-      migrations: [],
-      subscribers: [],
     }),
+    CommunityModule,
+    ArgicultureModule,
+    EconomyModule,
+    EducationModule,
+    GeographyModule,
+    InfrastructureModule,
+    PopulationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

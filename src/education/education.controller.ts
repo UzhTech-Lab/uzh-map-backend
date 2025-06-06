@@ -9,7 +9,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Education } from './educaiton.entity';
+import { Education } from './education.entity';
 import { EducationService } from './education.service';
 import { EducationCreateDTO } from './dtos/education-create.dto';
 import { EducationUpdateDTO } from './dtos/education-update.dto';

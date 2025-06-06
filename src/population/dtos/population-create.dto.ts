@@ -26,7 +26,7 @@ export class CreatePopulationDTO {
   school_age: number;
 
   @IsNumber()
-  working_age_percent: number;
+  working_age: number;
 
   @IsInt()
   @IsPositive()
@@ -40,4 +40,7 @@ export class CreatePopulationDTO {
   @ValidateNested({ each: true })
   @Type(() => NationalityDTO)
   nationalities: NationalityDTO[];
+
+  @IsInt()
+  communityId: number;
 }

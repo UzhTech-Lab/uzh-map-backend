@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Education } from './educaiton.entity';
+import { Education } from './education.entity';
 import { EducationRepository } from './education.repository';
 import { EducationCreateDTO } from './dtos/education-create.dto';
 import { EducationUpdateDTO } from './dtos/education-update.dto';

@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Community } from './community.entity';
+import { Community } from '../community/community.entity';
 
 @Entity()
 export class Infrastructure {
@@ -19,12 +19,14 @@ export class Infrastructure {
   railway: boolean;
 
   @Column()
-  buses: boolean;
+  busses: boolean;
 
   @Column()
   stations: number;
 
-  @OneToOne(() => Community, (community) => community.infrastructure)
+  @OneToOne(() => Community, (community) => community.infrastructure, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'community_id' })
   community: Community;
 }

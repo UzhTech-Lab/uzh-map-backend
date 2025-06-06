@@ -1,8 +1,8 @@
 export enum Categories {
-  'river',
-  'lake',
-  'mountain',
-  'wood',
-  'quarry',
-  'nature',
+  river = 'річка',
+  lake = 'озеро',
+  mountain = 'гора',
+  wood = 'ліс',
+  quarry = 'кар’єра',
+  nature = 'природа',
 }

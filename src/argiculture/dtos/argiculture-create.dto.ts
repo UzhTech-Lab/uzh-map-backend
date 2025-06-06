@@ -1,9 +1,12 @@
-import { IsString } from 'class-validator';
+import { IsInt, IsString } from 'class-validator';
 
-export class ArgicultureCreateDTO {
+export class AgricultureCreateDTO {
   @IsString()
   name: string;
 
   @IsString()
-  details: string;
+  details?: string;
+
+  @IsInt()
+  communityId: number;
 }

@@ -5,12 +5,12 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Geography } from './geography.entity';
-import { Economy } from './economy.entity';
-import { Infrastructure } from './infrastructure.enity';
-import { Argiculture } from './argiculture.entity';
-import { Education } from './educaiton.entity';
-import { Population } from './population.entity';
+import { Geography } from '../geography/geography.entity';
+import { Economy } from '../economy/economy.entity';
+import { Infrastructure } from '../infrastructure/infrastructure.entity';
+import { Agriculture } from '../argiculture/agriculture.entity';
+import { Education } from '../education/education.entity';
+import { Population } from '../population/population.entity';
 
 @Entity()
 export class Community {
@@ -53,7 +53,7 @@ export class Community {
   @Column('text', { array: true })
   settlements: string[];
 
-  @OneToOne(() => Geography, (geography) => geography.community)
+  @OneToMany(() => Geography, (geography) => geography.community)
   geography: Geography;
 
   @OneToOne(() => Population, (population) => population.community)
@@ -65,8 +65,8 @@ export class Community {
   @OneToOne(() => Infrastructure, (infrastructure) => infrastructure.community)
   infrastructure: Infrastructure;
 
-  @OneToMany(() => Argiculture, (argiculture) => argiculture.community)
-  argiculture_places: Argiculture[];
+  @OneToMany(() => Agriculture, (argiculture) => argiculture.community)
+  argiculture_places: Agriculture[];
 
   @OneToMany(() => Education, (education) => education.community)
   education_places: Education[];
