@@ -17,19 +17,22 @@ export class Population {
   @JoinColumn({ name: 'community_id' })
   community: Community;
 
-  @Column()
+  @Column({ nullable: true })
+  amount: number;
+
+  @Column({ nullable: true })
   preschool_age: number;
 
-  @Column()
+  @Column({ nullable: true })
   school_age: number;
 
-  @Column()
+  @Column({ nullable: true })
   working_age: number;
 
-  @Column()
+  @Column({ nullable: true })
   retired: number;
 
-  @Column()
+  @Column({ nullable: true })
   voters: number;
 
   @Column('jsonb')

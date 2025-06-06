@@ -12,14 +12,17 @@ export class Economy {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  industry_amount: number;
+  @Column('float', { nullable: true })
+  budget: number | null;
 
-  @Column()
-  trade_amount: number;
+  @Column('float', { nullable: true })
+  industry_amount: number | null;
 
-  @Column()
-  enterprises_amount: number;
+  @Column('float', { nullable: true })
+  trade_amount: number | null;
+
+  @Column('float', { nullable: true })
+  enterprises_amount: number | null;
 
   @OneToOne(() => Community, (community) => community.economy, {
     onDelete: 'CASCADE',

@@ -12,8 +12,17 @@ export class CommunityRepository {
     private readonly repo: Repository<Community>,
   ) {}
 
-  async findAll(): Promise<Community[]> {
-    return this.repo.find();
+  findAll(): Promise<Community[]> {
+    return this.repo.find({
+      relations: {
+        geography: true,
+        population: true,
+        economy: true,
+        infrastructure: true,
+        argiculture_places: true,
+        education_places: true,
+      },
+    });
   }
 
   async findById(id: number): Promise<Community> {

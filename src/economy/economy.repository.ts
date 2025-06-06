@@ -35,8 +35,8 @@ export class EconomyRepository {
     if (!community) {
       throw new NotFoundException('Community not found');
     }
-    this.economyRepository.create(economy);
-    economy.communityId = community.id;
+    this.economyRepository.create({ ...economy, community: community });
+
     return this.economyRepository.save(economy);
   }
 
