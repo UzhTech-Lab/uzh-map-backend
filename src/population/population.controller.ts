@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  Body,
   Controller,
   Delete,
   Get,
@@ -12,12 +13,28 @@ import { PopulationService } from './population.service';
 import { Population } from './population.entity';
 import { CreatePopulationDTO } from './dtos/population-create.dto';
 import { PopulationUpdateDTO } from './dtos/population-update.dto';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBody,
+  ApiResponse,
+  ApiParam,
+} from '@nestjs/swagger';
 
+@ApiTags('Population')
 @Controller('api/v1/population')
 export class PopulationController {
   constructor(private readonly populationService: PopulationService) {}
 
   @Get('/:id')
+  @ApiOperation({ summary: 'Get population by community ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({
+    status: 200,
+    description: 'List of population records for a community',
+    type: Population,
+    isArray: true,
+  })
   async getPopulationByCommunityId(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Population[]> {
@@ -31,7 +48,16 @@ export class PopulationController {
   }
 
   @Post()
-  async createPopulation(population: CreatePopulationDTO): Promise<Population> {
+  @ApiOperation({ summary: 'Create new population entry' })
+  @ApiBody({ type: CreatePopulationDTO })
+  @ApiResponse({
+    status: 201,
+    description: 'Population entry created',
+    type: Population,
+  })
+  async createPopulation(
+    @Body() population: CreatePopulationDTO,
+  ): Promise<Population> {
     try {
       return this.populationService.createPopulation(population);
     } catch (error) {
@@ -42,9 +68,17 @@ export class PopulationController {
   }
 
   @Patch('/:id')
+  @ApiOperation({ summary: 'Update population entry by ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiBody({ type: PopulationUpdateDTO })
+  @ApiResponse({
+    status: 200,
+    description: 'Population updated',
+    type: Population,
+  })
   async updatePopulation(
     @Param('id', ParseIntPipe) id: number,
-    population: PopulationUpdateDTO,
+    @Body() population: PopulationUpdateDTO,
   ): Promise<Population | null> {
     try {
       return this.populationService.updatePopulation(id, population);
@@ -56,9 +90,12 @@ export class PopulationController {
   }
 
   @Delete('/:id')
+  @ApiOperation({ summary: 'Delete population by ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({ status: 204, description: 'Population deleted' })
   async deletePopulation(@Param('id', ParseIntPipe) id: number): Promise<void> {
     try {
-      return this.deletePopulation(id);
+      return this.populationService.deletePopulation(id);
     } catch (error) {
       throw new BadRequestException(
         error.message || 'Error during deleting population',

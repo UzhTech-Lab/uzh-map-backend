@@ -65,31 +65,67 @@ export class FullCommunityCreateDTO {
   history: string;
 
   @ApiProperty({
-    example: '["Ужгород"]',
+    example: ['Ужгород'],
   })
   @IsArray()
   settlements: string[];
 
+  @ApiProperty({
+    type: [GeographyCreateDTO],
+  })
   @ValidateNested()
   @Type(() => GeographyCreateDTO)
   geography: GeographyCreateDTO[];
 
+  @ApiProperty({
+    example: {
+      amount: 5224,
+      preschool_age: 384,
+      school_age: 1111,
+      working_age: 3082,
+      retired: 647,
+      voters: 123,
+      nationalities: [],
+    },
+  })
   @ValidateNested()
   @Type(() => CreatePopulationDTO)
   population: CreatePopulationDTO;
 
+  @ApiProperty({
+    example: {
+      budget: 236852.212,
+      industry_amount: 2,
+      trade_amount: 10,
+      enterprises_amount: 5,
+    },
+  })
   @ValidateNested()
   @Type(() => EconomyCreateDTO)
   economy: EconomyCreateDTO;
 
+  @ApiProperty({
+    example: {
+      roads: true,
+      railway: false,
+      busses: true,
+      stations: 0,
+    },
+  })
   @ValidateNested()
   @Type(() => InfrastructureCreateDTO)
   infrastructure: InfrastructureCreateDTO;
 
+  @ApiProperty({
+    type: [AgricultureCreateDTO],
+  })
   @ValidateNested({ each: true })
   @Type(() => AgricultureCreateDTO)
   argiculture_places: AgricultureCreateDTO[];
 
+  @ApiProperty({
+    type: [EducationCreateDTO],
+  })
   @ValidateNested({ each: true })
   @Type(() => EducationCreateDTO)
   education_places: EducationCreateDTO[];

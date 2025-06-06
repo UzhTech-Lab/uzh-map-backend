@@ -10,6 +10,7 @@ export class AgricultureCreateDTO {
   @IsString()
   details?: string;
 
+  @ApiProperty({ example: 1 })
   @IsInt()
   communityId: number;
 }

@@ -13,29 +13,48 @@ import { Education } from './education.entity';
 import { EducationService } from './education.service';
 import { EducationCreateDTO } from './dtos/education-create.dto';
 import { EducationUpdateDTO } from './dtos/education-update.dto';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBody,
+} from '@nestjs/swagger';
 
+@ApiTags('Education')
 @Controller('/api/v1/education')
 export class EducationController {
   constructor(private educationService: EducationService) {}
 
   @Get('/:id')
+  @ApiOperation({ summary: 'Get all education places by community ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({
+    status: 200,
+    description: 'List of education places for the community',
+    type: Education,
+    isArray: true,
+  })
   async getEducationPlaces(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Education[]> {
     try {
-      if (isNaN(id)) {
-        throw new Error('Invalid id ');
-      }
-
       return await this.educationService.getEducationPlaces(id);
     } catch (error) {
       throw new BadRequestException(
-        error.message || 'Error during fetching education places ',
+        error.message || 'Error during fetching education places',
       );
     }
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create new education place' })
+  @ApiBody({ type: EducationCreateDTO })
+  @ApiResponse({
+    status: 201,
+    description: 'Education place successfully created',
+    type: Education,
+  })
   async createEducationPlace(
     @Body() body: EducationCreateDTO,
   ): Promise<Education> {
@@ -49,6 +68,14 @@ export class EducationController {
   }
 
   @Patch('/:id')
+  @ApiOperation({ summary: 'Update an education place by ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiBody({ type: EducationUpdateDTO })
+  @ApiResponse({
+    status: 200,
+    description: 'Education place updated',
+    type: Education,
+  })
   async updatedEducationPlace(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: EducationUpdateDTO,
@@ -63,6 +90,9 @@ export class EducationController {
   }
 
   @Delete('/:id')
+  @ApiOperation({ summary: 'Delete an education place by ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({ status: 204, description: 'Education place deleted' })
   async deleteEducationPlace(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<void> {

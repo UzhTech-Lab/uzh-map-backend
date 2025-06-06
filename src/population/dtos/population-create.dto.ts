@@ -54,6 +54,7 @@ export class CreatePopulationDTO {
   @Type(() => NationalityDTO)
   nationalities: NationalityDTO[];
 
+  @ApiProperty({ example: 1 })
   @IsInt()
   communityId: number;
 }

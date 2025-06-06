@@ -18,6 +18,7 @@ export class InfrastructureCreateDTO {
   @IsNumber()
   stations: number;
 
+  @ApiProperty({ example: 1 })
   @IsInt()
   communityId: number;
 }

@@ -11,6 +11,7 @@ export class GeographyCreateDTO {
   @IsEnum(Categories)
   category: Categories;
 
+  @ApiProperty({ example: 1 })
   @IsInt()
   communityId: number;
 }

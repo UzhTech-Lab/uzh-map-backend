@@ -18,6 +18,7 @@ export class EconomyCreateDTO {
   @IsNumber()
   enterprises_amount?: number;
 
+  @ApiProperty({ example: 1 })
   @IsInt()
   communityId: number;
 }
