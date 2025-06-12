@@ -21,11 +21,11 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('Infrastructure')
-@Controller('infrastructure')
+@Controller('/api/v1/infrastructure')
 export class InfrastructureController {
   constructor(private readonly infrastructureService: InfrastructureService) {}
 
-  @Get('/:id')
+  @Get('/community/:id')
   @ApiOperation({ summary: 'Get infrastructure by community ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({
@@ -38,6 +38,21 @@ export class InfrastructureController {
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Infrastructure[]> {
     return this.infrastructureService.getInfrastructureByCommunityId(id);
+  }
+
+  @Get('/:id')
+  @ApiOperation({ summary: 'Get infrastructure by community ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({
+    status: 200,
+    description: 'List of infrastructure records for a community',
+    type: Infrastructure,
+    isArray: true,
+  })
+  async getInfrastructureById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Infrastructure | null> {
+    return this.infrastructureService.getInfrastructureById(id);
   }
 
   @Post()

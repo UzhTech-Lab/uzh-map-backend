@@ -7,7 +7,7 @@ export class GeographyCreateDTO {
   @IsString()
   name: string;
 
-  @ApiProperty({ example: 'річка' })
+  @ApiProperty({ example: { example: Object.values(Categories) } })
   @IsEnum(Categories)
   category: Categories;
 

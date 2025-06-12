@@ -22,7 +22,7 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('Economy')
-@Controller('economy')
+@Controller('api/v1/economy')
 export class EconomyController {
   constructor(private economyService: EconomyService) {}
 

@@ -26,7 +26,7 @@ import {
 export class PopulationController {
   constructor(private readonly populationService: PopulationService) {}
 
-  @Get('/:id')
+  @Get('/commynity/:id')
   @ApiOperation({ summary: 'Get population by community ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({
@@ -40,6 +40,27 @@ export class PopulationController {
   ): Promise<Population[]> {
     try {
       return this.populationService.findPopulationByCommunityId(id);
+    } catch (error) {
+      throw new BadRequestException(
+        error.message || 'Error during getting population',
+      );
+    }
+  }
+
+  @Get('/:id')
+  @ApiOperation({ summary: 'Get population by community ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({
+    status: 200,
+    description: 'List of population records for a community',
+    type: Population,
+    isArray: true,
+  })
+  async getPopulationById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Population | null> {
+    try {
+      return this.populationService.findPopulationById(id);
     } catch (error) {
       throw new BadRequestException(
         error.message || 'Error during getting population',

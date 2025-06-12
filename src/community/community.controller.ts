@@ -45,12 +45,29 @@ export class CommunityController {
     }
   }
 
+  @Get('/list')
+  @ApiOperation({ summary: 'Return a list with the names of all communities' })
+  @ApiResponse({
+    status: 200,
+    description: "List with communities' names",
+    isArray: true,
+  })
+  async getCommunityList(): Promise<{ id: number; name: string }[]> {
+    try {
+      return this.communityService.getNames();
+    } catch (error) {
+      throw new BadRequestException(
+        error.message || "Error during getting communities' name",
+      );
+    }
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Receive the community by ID' })
   @ApiParam({ name: 'id', type: Number, description: 'Community ID' })
   @ApiResponse({
     status: 200,
-    description: 'Received some community',
+    description: 'Received some community with all information about it',
     type: Community,
   })
   async findById(@Param('id', ParseIntPipe) id: number): Promise<Community> {

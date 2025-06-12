@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 import { Categories } from 'src/assets/enums/education-categories-enums';
 
 export class EducationUpdateDTO {
@@ -8,8 +8,13 @@ export class EducationUpdateDTO {
   @IsString()
   name: string;
 
-  @ApiProperty({ example: 'школа' })
+  @ApiProperty({ example: Object.values(Categories) })
   @IsOptional()
   @IsEnum(Categories)
   category: Categories;
+
+  @ApiProperty({ example: 2 })
+  @IsOptional()
+  @IsInt()
+  amount: number;
 }

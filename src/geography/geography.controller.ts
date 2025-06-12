@@ -22,11 +22,11 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('Geography')
-@Controller('geography')
+@Controller('api/v1/geography')
 export class GeographyController {
   constructor(private readonly geographyService: GeographyService) {}
 
-  @Get('/:id')
+  @Get('/community/:id')
   @ApiOperation({ summary: 'Get geography by community ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({
@@ -35,11 +35,32 @@ export class GeographyController {
     type: Geography,
     isArray: true,
   })
-  async getGeographyById(
+  async getGeographyCommunityById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Geography[]> {
     try {
       return this.geographyService.getGeographyByCommunityId(id);
+    } catch (error) {
+      throw new BadRequestException(
+        error.message || 'Error during getting geography',
+      );
+    }
+  }
+
+  @Get('/:id')
+  @ApiOperation({ summary: 'Get geography by ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({
+    status: 200,
+    description: 'Geography data found by ID',
+    type: Geography,
+    isArray: true,
+  })
+  async getGeographyById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Geography | null> {
+    try {
+      return this.geographyService.getGeographyById(id);
     } catch (error) {
       throw new BadRequestException(
         error.message || 'Error during getting geography',

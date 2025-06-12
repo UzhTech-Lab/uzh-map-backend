@@ -25,6 +25,10 @@ export class CommunityRepository {
     });
   }
 
+  find(): Promise<Community[]> {
+    return this.repo.find();
+  }
+
   async findById(id: number): Promise<Community> {
     const community = await this.repo.findOne({
       where: { id },

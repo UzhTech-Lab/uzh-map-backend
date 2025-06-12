@@ -21,6 +21,10 @@ export class PopulationRepository {
     return this.populationRepository.find({ where: { community: { id } } });
   }
 
+  async findPopulationById(id: number): Promise<Population | null> {
+    return this.populationRepository.findOne({ where: { community: { id } } });
+  }
+
   async createPopulation(population: CreatePopulationDTO): Promise<Population> {
     const community = await this.communityRepo.findById(population.communityId);
 
