@@ -33,6 +33,11 @@ export class CommunityService {
     return this.communityRepo.findAll();
   }
 
+  async getNames(): Promise<{ id: number; name: string }[]> {
+    const communities = await this.communityRepo.find();
+    return communities.map(({ id, name }) => ({ id, name }));
+  }
+
   findById(id: number): Promise<Community> {
     return this.communityRepo.findById(id);
   }

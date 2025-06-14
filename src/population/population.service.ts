@@ -16,6 +16,10 @@ export class PopulationService {
     return this.populationRepository.findPopulationByCommunityId(id);
   }
 
+  async findPopulationById(id: number): Promise<Population | null> {
+    return this.populationRepository.findPopulationById(id);
+  }
+
   async createPopulation(population: CreatePopulationDTO): Promise<Population> {
     return this.populationRepository.createPopulation(population);
   }

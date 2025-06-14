@@ -47,6 +47,26 @@ export class EducationController {
     }
   }
 
+  @Get('/:id')
+  @ApiOperation({ summary: 'Get all education place by ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiResponse({
+    status: 200,
+    description: 'Education place by id',
+    type: Education,
+  })
+  async getEducationPlaceById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Education | null> {
+    try {
+      return await this.educationService.getPlaceById(id);
+    } catch (error) {
+      throw new BadRequestException(
+        error.message || 'Error during fetching education place',
+      );
+    }
+  }
+
   @Post()
   @ApiOperation({ summary: 'Create new education place' })
   @ApiBody({ type: EducationCreateDTO })

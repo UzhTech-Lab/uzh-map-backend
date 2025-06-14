@@ -45,7 +45,7 @@ export class Community {
   website?: string;
 
   @Column('text', { array: true })
-  photos: string[];
+  photos?: string[];
 
   @Column()
   history: string;

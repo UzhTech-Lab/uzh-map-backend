@@ -1,0 +1,35 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    # Build the Docker image from the local Dockerfile
+    build: .
+    ports:
+      - 5000:5000
+    # Load environment variables from .env
+    env_file:
+      - .env
+    # Override or add variables if necessary
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+    # Ensure the database is started before the backend
+    depends_on:
+      - db
+
+  db:
+    # Use the official Postgres image
+    image: postgres:15
+    # Configure database credentials from .env
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    # Expose the database port to the host if needed
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

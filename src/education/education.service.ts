@@ -16,6 +16,10 @@ export class EducationService {
     return this.educationRepository.findByCommunityId(id);
   }
 
+  async getPlaceById(id: number): Promise<Education | null> {
+    return this.educationRepository.findById(id);
+  }
+
   async createEducationPlace(
     educationPlace: EducationCreateDTO,
   ): Promise<Education> {

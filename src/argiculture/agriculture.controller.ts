@@ -26,7 +26,7 @@ import {
 export class ArgicultureController {
   constructor(private readonly argicultureService: AgricultureService) {}
 
-  @Get('/:id')
+  @Get('/community/:id')
   @ApiOperation({ summary: 'Get agriculture data by community ID' })
   @ApiParam({ name: 'id', type: Number, description: 'Community ID' })
   @ApiResponse({
@@ -38,6 +38,26 @@ export class ArgicultureController {
   getArgicultureByCommunityId(@Param('id', ParseIntPipe) id: number) {
     try {
       return this.argicultureService.getArgicultureByCommunityId(id);
+    } catch (error) {
+      throw new BadRequestException(
+        error.message || 'Error during getting agriculture',
+      );
+    }
+  }
+
+  @Get('/:id')
+  @ApiOperation({ summary: 'Get agriculture data by ID' })
+  @ApiParam({ name: 'id', type: Number, description: 'ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Agriculture data found by the ID',
+    type: Agriculture,
+  })
+  getAgricultureById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Agriculture | null> {
+    try {
+      return this.argicultureService.getArgicultureById(id);
     } catch (error) {
       throw new BadRequestException(
         error.message || 'Error during getting agriculture',
