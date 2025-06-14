@@ -4,7 +4,7 @@ import { EconomyService } from './economy.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Economy } from './economy.entity';
 import { EconomyRepository } from './economy.repository';
-import { CommunityModule } from 'src/community/community.module';
+import { CommunityModule } from '../community/community.module';
 
 @Module({
   imports: [

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { EducationCreateDTO } from './dtos/education-create.dto';
 import { EducationUpdateDTO } from './dtos/education-update.dto';
-import { CommunityRepository } from 'src/community/community.repository';
+import { CommunityRepository } from '../community/community.repository';
 
 @Injectable()
 export class EducationRepository {

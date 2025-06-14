@@ -1,0 +1,32 @@
+name: PostgreSQL Backup
+
+on:
+  schedule:
+    - cron: '0 2 * * *' 
+  workflow_dispatch: 
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install PostgreSQL client
+        run: sudo apt-get install -y postgresql-client
+
+      - name: Dump PostgreSQL to file
+        env:
+          PGPASSWORD: ${{ secrets.PGPASSWORD }}
+        run: |
+          mkdir backups
+          pg_dump -h mainline.proxy.rlwy.net \
+                  -p 44873 \
+                  -U postgres \
+                  -d railway \
+                  -F c \
+                  -f backups/backup_$(date +'%Y-%m-%d_%H-%M').dump
+
+      - name: Upload dump as GitHub artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: db-backup
+          path: backups/*.dump

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { GeographyCreateDTO } from './dtos/geography-create.dto';
 import { GeographyUpdateDTO } from './dtos/geography-update.dto';
-import { CommunityRepository } from 'src/community/community.repository';
+import { CommunityRepository } from '../community/community.repository';
 
 @Injectable()
 export class GeographyRepository {

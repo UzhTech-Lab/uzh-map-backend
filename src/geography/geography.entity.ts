@@ -1,4 +1,4 @@
-import { Categories } from 'src/assets/enums/geography-categories-enums';
+import { Categories } from '../assets/enums/geography-categories-enums';
 import {
   Column,
   Entity,

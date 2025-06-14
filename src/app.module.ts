@@ -20,7 +20,7 @@ import { PopulationModule } from './population/population.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -28,7 +28,7 @@ import { PopulationModule } from './population/population.module';
       username: process.env.DB_USERNAME,
       password: String(process.env.DB_PASSWORD),
       database: process.env.DB_NAME,
-      synchronize: true,
+      synchronize: false,
       logging: true,
       entities: [
         Community,

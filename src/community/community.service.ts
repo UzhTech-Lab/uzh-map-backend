@@ -4,12 +4,12 @@ import { Community } from './community.entity';
 import { CommunityCreateDTO } from './dtos/community-create.dto';
 import { CommunityUpdateDTO } from './dtos/community-update.dto';
 import { FullCommunityCreateDTO } from './dtos/full-community-create.dto';
-import { GeographyRepository } from 'src/geography/geography.repository';
-import { PopulationRepository } from 'src/population/population.repository';
-import { EconomyRepository } from 'src/economy/economy.repository';
-import { InfrastructureRepository } from 'src/infrastructure/infrastructure.repository';
-import { AgricultureRepository } from 'src/argiculture/agriculture.repository';
-import { EducationRepository } from 'src/education/education.repository';
+import { GeographyRepository } from '../geography/geography.repository';
+import { PopulationRepository } from '../population/population.repository';
+import { EconomyRepository } from '../economy/economy.repository';
+import { InfrastructureRepository } from '../infrastructure/infrastructure.repository';
+import { AgricultureRepository } from '../argiculture/agriculture.repository';
+import { EducationRepository } from '../education/education.repository';
 
 @Injectable()
 export class CommunityService {

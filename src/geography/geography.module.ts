@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Geography } from './geography.entity';
 import { GeographyService } from './geography.service';
 import { GeographyRepository } from './geography.repository';
-import { CommunityModule } from 'src/community/community.module';
+import { CommunityModule } from '../community/community.module';
 
 @Module({
   imports: [

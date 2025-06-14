@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { InfrastructureCreateDTO } from './dtos/infrastructure-create.dto';
 import { InfrastructureUpdateDTO } from './dtos/infrastructure-update.dto';
 import { NotFoundException } from '@nestjs/common';
-import { CommunityRepository } from 'src/community/community.repository';
+import { CommunityRepository } from '../community/community.repository';
 
 export class InfrastructureRepository {
   constructor(

@@ -1,4 +1,4 @@
-import { Categories } from 'src/assets/enums/education-categories-enums';
+import { Categories } from '../assets/enums/education-categories-enums';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Community } from '../community/community.entity';
 

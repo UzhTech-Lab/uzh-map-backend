@@ -4,7 +4,7 @@ import { EducationController } from './education.controller';
 import { EducationRepository } from './education.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Education } from './education.entity';
-import { CommunityModule } from 'src/community/community.module';
+import { CommunityModule } from '../community/community.module';
 
 @Module({
   imports: [

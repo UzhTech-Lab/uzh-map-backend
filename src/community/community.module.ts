@@ -4,12 +4,12 @@ import { Community } from './community.entity';
 import { CommunityController } from './community.controller';
 import { CommunityService } from './community.service';
 import { CommunityRepository } from './community.repository';
-import { GeographyModule } from 'src/geography/geography.module';
-import { ArgicultureModule } from 'src/argiculture/agriculture.module';
-import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
-import { PopulationModule } from 'src/population/population.module';
-import { EconomyModule } from 'src/economy/economy.module';
-import { EducationModule } from 'src/education/education.module';
+import { GeographyModule } from '../geography/geography.module';
+import { ArgicultureModule } from '../argiculture/agriculture.module';
+import { InfrastructureModule } from '../infrastructure/infrastructure.module';
+import { PopulationModule } from '../population/population.module';
+import { EconomyModule } from '../economy/economy.module';
+import { EducationModule } from '../education/education.module';
 
 @Module({
   imports: [

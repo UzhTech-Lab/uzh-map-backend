@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { PopulationUpdateDTO } from './dtos/population-update.dto';
 import { CreatePopulationDTO } from './dtos/population-create.dto';
 import { NotFoundException } from '@nestjs/common';
-import { CommunityRepository } from 'src/community/community.repository';
+import { CommunityRepository } from '../community/community.repository';
 
 export class PopulationRepository {
   constructor(

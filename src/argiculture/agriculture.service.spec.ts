@@ -1,15 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ArgicultureService } from './agriculture.service';
+import { AgricultureService } from './agriculture.service';
+import { AgricultureRepository } from './agriculture.repository';
 
 describe('ArgicultureService', () => {
-  let service: ArgicultureService;
+  let service: AgricultureService;
+
+  const mockRepo = {
+    findAgriculturesByCommunityId: jest.fn(),
+    findAgricultureById: jest.fn(),
+    findAllAgricultures: jest.fn(),
+    createAgriculture: jest.fn(),
+    updateAgriculture: jest.fn(),
+    deleteArgiculture: jest.fn(),
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ArgicultureService],
+      providers: [
+        AgricultureService,
+        {
+          provide: AgricultureRepository,
+          useValue: mockRepo,
+        },
+      ],
     }).compile();
 
-    service = module.get<ArgicultureService>(ArgicultureService);
+    service = module.get<AgricultureService>(AgricultureService);
   });
 
   it('should be defined', () => {

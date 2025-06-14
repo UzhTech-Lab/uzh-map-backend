@@ -4,7 +4,7 @@ import { Agriculture } from './agriculture.entity';
 import { Repository } from 'typeorm';
 import { AgricultureCreateDTO } from './dtos/argiculture-create.dto';
 import { AgricultureUpdateDTO } from './dtos/argiculture-update.dto';
-import { CommunityRepository } from 'src/community/community.repository';
+import { CommunityRepository } from '../community/community.repository';
 
 @Injectable()
 export class AgricultureRepository {

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 import { EconomyUpdateDTO } from './dtos/economy-update.dto';
 import { EconomyCreateDTO } from './dtos/economy-create.dto';
-import { CommunityRepository } from 'src/community/community.repository';
+import { CommunityRepository } from '../community/community.repository';
 
 export class EconomyRepository {
   constructor(

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { Categories } from 'src/assets/enums/geography-categories-enums';
+import { Categories } from '../../assets/enums/geography-categories-enums';
 
 export class GeographyUpdateDTO {
   @ApiProperty({ example: 'Уж' })

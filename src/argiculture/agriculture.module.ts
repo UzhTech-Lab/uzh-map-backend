@@ -4,7 +4,7 @@ import { AgricultureService } from './agriculture.service';
 import { AgricultureRepository } from './agriculture.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Agriculture } from './agriculture.entity';
-import { CommunityModule } from 'src/community/community.module';
+import { CommunityModule } from '../community/community.module';
 
 @Module({
   imports: [
