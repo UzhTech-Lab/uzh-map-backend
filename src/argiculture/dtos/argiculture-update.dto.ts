@@ -5,10 +5,10 @@ export class AgricultureUpdateDTO {
   @ApiProperty({ example: 'Угіддя' })
   @IsOptional()
   @IsString()
-  name: string;
+  name?: string;
 
   @ApiProperty({ example: '2304 га' })
   @IsOptional()
   @IsString()
-  details: string;
+  details?: string;
 }

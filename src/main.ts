@@ -6,7 +6,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: ['http://localhost:5000', 'https://uzh-map-vue.vercel.app/'],
+    origin: [
+      'http://localhost:5000',
+      'http://localhost:3000',
+      'https://uzh-map-vue.vercel.app',
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
