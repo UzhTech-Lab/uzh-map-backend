@@ -36,7 +36,7 @@ export class Community {
   @Column()
   established: number;
 
-  @Column()
+  @Column('float')
   area_km2: number;
 
   @Column()

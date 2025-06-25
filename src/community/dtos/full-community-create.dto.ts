@@ -1,6 +1,7 @@
 import {
   IsArray,
   IsEmail,
+  IsNumber,
   IsOptional,
   IsString,
   ValidateNested,
@@ -36,9 +37,76 @@ export class FullCommunityCreateDTO {
   @IsString()
   district: string;
 
+  @ApiProperty({ example: 5224 })
+  @IsOptional()
+  @IsNumber()
+  population_amount?: number;
+
+  @ApiProperty({ example: 1895 })
+  @IsOptional()
+  @IsString()
+  established?: number;
+
+  @ApiProperty({ example: 42.7 })
+  @IsOptional()
+  area_km2?: number;
+
   @ApiProperty({ example: 'Ужгород' })
   @IsString()
   center_settlement: string;
+
+  @ApiProperty({ example: { latitude: 48.789, longitude: 123.23 } })
+  @IsOptional()
+  @IsString()
+  center?: {
+    latitude: number;
+    longitude: number;
+  };
+
+  @ApiProperty({
+    example:
+      'Громада утворилась на базі лише одного населеного пункту – міста Ужгорода',
+  })
+  @IsString()
+  history: string;
+
+  @ApiProperty({
+    example: ['Ужгород'],
+  })
+  @IsArray()
+  settlements: string[];
+
+  @ApiProperty({
+    example: [
+      {
+        name: "Басейн 'Дельфін'",
+        address: 'вул. Гагаріна, 22',
+        latitude: 48.6175,
+        longitude: 22.2895,
+        type: 'sports',
+        description: 'Міський плавальний басейн',
+      },
+    ],
+  })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Place)
+  keyPlaces?: Place[];
+
+  @ApiProperty({ example: { lat: 48.62, lng: 22.3 } })
+  @IsOptional()
+  coordinates?: Array<{
+    latitude: number;
+    longitude: number;
+  }>;
+
+  @ApiProperty({
+    example: 'Громада розташована на заході України в Закарпатті.',
+  })
+  @IsOptional()
+  @IsString()
+  geography_description?: string;
 
   @ApiProperty({ example: '88000' })
   @IsString()
@@ -60,19 +128,6 @@ export class FullCommunityCreateDTO {
   @IsOptional()
   @IsArray()
   photos?: string[];
-
-  @ApiProperty({
-    example:
-      'Громада утворилась на базі лише одного населеного пункту – міста Ужгорода',
-  })
-  @IsString()
-  history: string;
-
-  @ApiProperty({
-    example: ['Ужгород'],
-  })
-  @IsArray()
-  settlements: string[];
 
   @ApiProperty({
     type: [GeographyCreateDTO],
@@ -102,6 +157,7 @@ export class FullCommunityCreateDTO {
       industry_amount: 2,
       trade_amount: 10,
       enterprises_amount: 5,
+      nationalities: [{ nationality_name: 'українці', percent: 100 }],
     },
   })
   @ValidateNested()
@@ -114,6 +170,12 @@ export class FullCommunityCreateDTO {
       railway: false,
       busses: true,
       stations: 0,
+      markets: 45,
+      shoppingCenters: 26,
+      supermarkets: 56,
+      restaurants: 78,
+      cafes: 12,
+      hotels: 246,
     },
   })
   @ValidateNested()
@@ -125,56 +187,14 @@ export class FullCommunityCreateDTO {
   })
   @ValidateNested({ each: true })
   @Type(() => AgricultureCreateDTO)
-  argiculture_places: AgricultureCreateDTO[];
+  argiculture: AgricultureCreateDTO[];
 
   @ApiProperty({
     type: [EducationCreateDTO],
   })
   @ValidateNested({ each: true })
   @Type(() => EducationCreateDTO)
-  education_places: EducationCreateDTO[];
-
-  @ApiProperty({ example: 5224 })
-  @IsOptional()
-  population_amount?: number;
-
-  @ApiProperty({ example: 1895 })
-  @IsOptional()
-  @IsString()
-  established?: number;
-
-  @ApiProperty({ example: 42.7 })
-  @IsOptional()
-  area_km2?: number;
-
-  @ApiProperty({ example: 'Ужгород' })
-  @IsOptional()
-  @IsString()
-  center?: {
-    latitude: number;
-    longitude: number;
-  };
-
-  @ApiProperty({ example: ['Площа Шандора Петефі', 'Ужгородський замок'] })
-  @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Place)
-  keyPlaces?: Place[];
-
-  @ApiProperty({ example: { lat: 48.62, lng: 22.3 } })
-  @IsOptional()
-  coordinates?: Array<{
-    latitude: number;
-    longitude: number;
-  }>;
-
-  @ApiProperty({
-    example: 'Громада розташована на заході України в Закарпатті.',
-  })
-  @IsOptional()
-  @IsString()
-  geography_description?: string;
+  education: EducationCreateDTO[];
 
   @IsOptional()
   @ValidateNested()

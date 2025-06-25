@@ -71,7 +71,7 @@ export const createFullDTO = {
   photos: [],
   history: '',
   settlements: ['Test name'],
-  argiculture_places: [
+  argiculture: [
     {
       name: 'Test name',
       details: 'test name',

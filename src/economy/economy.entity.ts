@@ -18,7 +18,7 @@ export class Economy {
   @Column({ nullable: true })
   companies: number;
 
-  @Column({ nullable: true })
+  @Column('float', { nullable: true })
   unemployment: number;
 
   @Column('text', { array: true, nullable: true })

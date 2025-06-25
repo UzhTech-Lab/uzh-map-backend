@@ -41,8 +41,8 @@ export class CommunityRepository {
         'population',
         'economy',
         'infrastructure',
-        'argiculture_places',
-        'education_places',
+        'argiculture',
+        'education',
       ],
     });
     if (!community) throw new NotFoundException('Community not found');

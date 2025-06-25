@@ -106,7 +106,7 @@ export class CommunityService {
     infrastructure.community = savedCommunity;
     await this.infrastructureRepo.saveInfrastructure(infrastructure);
 
-    for (const arg of dto.argiculture_places) {
+    for (const arg of dto.argiculture) {
       const agriculture = await this.agricultureRepo.createAgriculture({
         ...arg,
         communityId: savedCommunity.id,
@@ -115,7 +115,7 @@ export class CommunityService {
       await this.agricultureRepo.saveArgiculture(agriculture);
     }
 
-    for (const edu of dto.education_places) {
+    for (const edu of dto.education) {
       const education = await this.educationRepo.createEducationPlace({
         ...edu,
       });
