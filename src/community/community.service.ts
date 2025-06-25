@@ -10,6 +10,9 @@ import { EconomyRepository } from '../economy/economy.repository';
 import { InfrastructureRepository } from '../infrastructure/infrastructure.repository';
 import { AgricultureRepository } from '../argiculture/agriculture.repository';
 import { EducationRepository } from '../education/education.repository';
+import { ReligionRepository } from '../religion/religion.repository';
+import { SportRepository } from '../sport/sport.repository';
+import { TransportRepository } from '../transport/transport.repository';
 
 @Injectable()
 export class CommunityService {
@@ -27,6 +30,12 @@ export class CommunityService {
     private readonly agricultureRepo: AgricultureRepository,
 
     private readonly educationRepo: EducationRepository,
+
+    private readonly religionRepo: ReligionRepository,
+
+    private readonly sportRepo: SportRepository,
+
+    private readonly transportRepo: TransportRepository,
   ) {}
 
   findAll(): Promise<Community[]> {
@@ -60,19 +69,24 @@ export class CommunityService {
       photos: dto.photos,
       history: dto.history,
       settlements: dto.settlements,
+      population_amount: dto.population_amount,
+      established: dto.established,
+      area_km2: dto.area_km2,
+      center: dto.center,
+      keyPlaces: dto.keyPlaces,
+      coordinates: dto.coordinates,
+      geography_description: dto.geography_description,
     };
 
     const savedCommunity =
       await this.communityRepo.createCommunity(newCommunity);
 
     for (const arg of dto.geography) {
-      const geography_place = await this.geographyRepo.createGeography({
+      const geographyPlace = await this.geographyRepo.createGeography({
         ...arg,
-        communityId: savedCommunity.id,
       });
-
-      geography_place.community = savedCommunity;
-      await this.geographyRepo.saveGeography(geography_place);
+      geographyPlace.community = savedCommunity;
+      await this.geographyRepo.saveGeography(geographyPlace);
     }
 
     const population = await this.populationRepo.createPopulation({
@@ -82,36 +96,55 @@ export class CommunityService {
     population.community = savedCommunity;
     await this.populationRepo.savePopulation(population);
 
-    const economy = await this.economyRepo.createEconomy({
-      ...dto.economy,
-      communityId: savedCommunity.id,
-    });
+    const economy = await this.economyRepo.createEconomy({ ...dto.economy });
     economy.community = savedCommunity;
     await this.economyRepo.saveEconomy(economy);
 
     const infrastructure = await this.infrastructureRepo.createInfrastucture({
       ...dto.infrastructure,
-      communityId: savedCommunity.id,
     });
     infrastructure.community = savedCommunity;
     await this.infrastructureRepo.saveInfrastructure(infrastructure);
 
     for (const arg of dto.argiculture_places) {
-      const argiculture = await this.agricultureRepo.createAgriculture({
+      const agriculture = await this.agricultureRepo.createAgriculture({
         ...arg,
         communityId: savedCommunity.id,
       });
-      argiculture.community = savedCommunity;
-      await this.agricultureRepo.saveArgiculture(argiculture);
+      agriculture.community = savedCommunity;
+      await this.agricultureRepo.saveArgiculture(agriculture);
     }
 
     for (const edu of dto.education_places) {
       const education = await this.educationRepo.createEducationPlace({
         ...edu,
-        communityId: savedCommunity.id,
       });
       education.community = savedCommunity;
       await this.educationRepo.saveEducationPlace(education);
+    }
+
+    if (dto.religion) {
+      const religion = await this.religionRepo.create({
+        ...dto.religion,
+        community: savedCommunity,
+      });
+      await this.religionRepo.save(religion);
+    }
+
+    if (dto.sport) {
+      const sport = await this.sportRepo.create({
+        ...dto.sport,
+        community: savedCommunity,
+      });
+      await this.sportRepo.save(sport);
+    }
+
+    if (dto.transport) {
+      const transport = await this.transportRepo.create({
+        ...dto.transport,
+        community: savedCommunity,
+      });
+      await this.transportRepo.save(transport);
     }
 
     return this.communityRepo.findById(savedCommunity.id);

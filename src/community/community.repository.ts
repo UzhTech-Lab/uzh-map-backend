@@ -19,8 +19,12 @@ export class CommunityRepository {
         population: true,
         economy: true,
         infrastructure: true,
-        argiculture_places: true,
-        education_places: true,
+        keyPlaces: true,
+        argiculture: true,
+        education: true,
+        religion: true,
+        sport: true,
+        transport: true,
       },
     });
   }

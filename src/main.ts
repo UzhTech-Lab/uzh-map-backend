@@ -9,6 +9,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:5000',
       'http://localhost:3000',
+      'https://map-uzhorod.vercel.app',
       'https://uzh-map-vue.vercel.app',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

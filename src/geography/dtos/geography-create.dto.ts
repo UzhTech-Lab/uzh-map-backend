@@ -1,17 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsInt, IsString } from 'class-validator';
-import { Categories } from '../../assets/enums/geography-categories-enums';
+import { IsEnum, IsString } from 'class-validator';
+import { MarkerTypeEnum } from 'src/assets/enums/place.categories.enum';
 
 export class GeographyCreateDTO {
-  @ApiProperty({ example: 'Уж' })
+  @ApiProperty()
   @IsString()
-  name: string;
+  coordinates: [number, number][];
 
-  @ApiProperty({ example: { example: Object.values(Categories) } })
-  @IsEnum(Categories)
-  category: Categories;
-
-  @ApiProperty({ example: 1 })
-  @IsInt()
-  communityId: number;
+  @ApiProperty({ example: { example: Object.values(MarkerTypeEnum) } })
+  @IsEnum(MarkerTypeEnum)
+  category: MarkerTypeEnum;
 }

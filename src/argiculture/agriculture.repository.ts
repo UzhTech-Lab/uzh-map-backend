@@ -33,15 +33,7 @@ export class AgricultureRepository {
   async createAgriculture(
     argiculture: AgricultureCreateDTO,
   ): Promise<Agriculture> {
-    const community = await this.communityRepo.findById(
-      argiculture.communityId,
-    );
-
-    if (!community) {
-      throw new NotFoundException('Community not found');
-    }
     this.agricultureRepository.create(argiculture);
-    argiculture.communityId = community.id;
     return this.agricultureRepository.save(argiculture);
   }
 

@@ -32,17 +32,8 @@ export class InfrastructureRepository {
   async createInfrastucture(
     infrastructure: InfrastructureCreateDTO,
   ): Promise<Infrastructure> {
-    const community = await this.communityRepo.findById(
-      infrastructure.communityId,
-    );
-
-    if (!community) {
-      throw new NotFoundException('Community not found');
-    }
-
     const newInfrastructure = this.infrastructureRepository.create({
       ...infrastructure,
-      community,
     });
 
     return await this.infrastructureRepository.save(newInfrastructure);

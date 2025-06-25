@@ -11,6 +11,10 @@ import { Infrastructure } from '../infrastructure/infrastructure.entity';
 import { Agriculture } from '../argiculture/agriculture.entity';
 import { Education } from '../education/education.entity';
 import { Population } from '../population/population.entity';
+import { Religion } from 'src/religion/religion.entity';
+import { Place } from 'src/place/place.entity';
+import { Transport } from 'src/transport/transport.entity';
+import { Sport } from 'src/sport/sport.entity';
 
 @Entity()
 export class Community {
@@ -27,10 +31,37 @@ export class Community {
   region: string;
 
   @Column()
+  population_amount: number;
+
+  @Column()
+  established: number;
+
+  @Column()
+  area_km2: number;
+
+  @Column()
   district: string;
 
   @Column()
   center_settlement: string;
+
+  @Column('json')
+  center: {
+    latitude: number;
+    longitude: number;
+  };
+
+  @OneToMany(() => Place, (place) => place.community)
+  keyPlaces: Place[];
+
+  @Column('json')
+  coordinates: Array<{
+    latitude: number;
+    longitude: number;
+  }>;
+
+  @Column()
+  geography_description: string;
 
   @Column()
   postal_index: string;
@@ -44,7 +75,7 @@ export class Community {
   @Column({ nullable: true })
   website?: string;
 
-  @Column('text', { array: true })
+  @Column('text', { array: true, nullable: true })
   photos?: string[];
 
   @Column()
@@ -53,7 +84,7 @@ export class Community {
   @Column('text', { array: true })
   settlements: string[];
 
-  @OneToMany(() => Geography, (geography) => geography.community)
+  @OneToOne(() => Geography, (geography) => geography.community)
   geography: Geography;
 
   @OneToOne(() => Population, (population) => population.community)
@@ -65,9 +96,18 @@ export class Community {
   @OneToOne(() => Infrastructure, (infrastructure) => infrastructure.community)
   infrastructure: Infrastructure;
 
-  @OneToMany(() => Agriculture, (argiculture) => argiculture.community)
-  argiculture_places: Agriculture[];
+  @OneToOne(() => Agriculture, (argiculture) => argiculture.community)
+  argiculture: Agriculture;
 
-  @OneToMany(() => Education, (education) => education.community)
-  education_places: Education[];
+  @OneToOne(() => Education, (education) => education.community)
+  education: Education;
+
+  @OneToOne(() => Religion, (religion) => religion.community)
+  religion: Religion;
+
+  @OneToOne(() => Sport, (sport) => sport.community)
+  sport: Sport;
+
+  @OneToOne(() => Transport, (transport) => transport.community)
+  transport: Transport;
 }

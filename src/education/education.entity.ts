@@ -1,5 +1,10 @@
-import { Categories } from '../assets/enums/education-categories-enums';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Community } from '../community/community.entity';
 
 @Entity()
@@ -7,14 +12,29 @@ export class Education {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  name: string;
+  @Column('jsonb', { nullable: true })
+  schools: { elementary: number; secondary: number; total: number };
 
-  @Column({ type: 'enum', enum: Categories })
-  category: Categories;
+  @Column('jsonb', { nullable: true })
+  hospitals: {
+    regional: number;
+    city: number;
+    specialized: number;
+    total: number;
+  };
 
-  @ManyToOne(() => Community, (community) => community.education_places, {
+  @Column({ nullable: true })
+  universities: number;
+
+  @Column({ nullable: true })
+  libraries: number;
+
+  @Column({ nullable: true })
+  theaters: number;
+
+  @OneToOne(() => Community, (community) => community.education, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'community_id' })
   community: Community;
 }

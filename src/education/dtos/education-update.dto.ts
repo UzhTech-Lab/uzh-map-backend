@@ -1,20 +1,42 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
-import { Categories } from '../../assets/enums/education-categories-enums';
+import { IsInt, IsObject, IsOptional } from 'class-validator';
 
 export class EducationUpdateDTO {
   @IsOptional()
-  @ApiProperty({ example: 'Ліцей №8' })
-  @IsString()
-  name: string;
+  @ApiProperty({ example: { elementary: 5, secondary: 32, total: 56 } })
+  @IsObject()
+  schools: { elementary: number; secondary: number; total: number };
 
-  @ApiProperty({ example: Object.values(Categories) })
   @IsOptional()
-  @IsEnum(Categories)
-  category: Categories;
+  @ApiProperty({
+    example: {
+      regional: 12,
+      city: 32,
+      specialized: 45,
+      total: 235,
+    },
+  })
+  @IsOptional()
+  @IsObject()
+  hospitals: {
+    regional: number;
+    city: number;
+    specialized: number;
+    total: number;
+  };
 
-  @ApiProperty({ example: 2 })
+  @ApiProperty({ example: 456 })
   @IsOptional()
   @IsInt()
-  amount: number;
+  universities: number;
+
+  @ApiProperty({ example: 20 })
+  @IsOptional()
+  @IsInt()
+  libraries: number;
+
+  @ApiProperty({ example: 5 })
+  @IsOptional()
+  @IsInt()
+  theaters: number;
 }

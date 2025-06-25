@@ -11,7 +11,7 @@ import {
   communities,
   createDTO,
   createFullDTO,
-} from '../assets/enums/data/mock.data.commuity';
+} from '../assets/data/mock.data.commuity';
 
 describe('CommunityService', () => {
   let service: CommunityService;

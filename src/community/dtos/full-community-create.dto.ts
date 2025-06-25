@@ -1,8 +1,8 @@
 import {
-  IsString,
+  IsArray,
   IsEmail,
   IsOptional,
-  IsArray,
+  IsString,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
@@ -14,6 +14,10 @@ import { InfrastructureCreateDTO } from '../../infrastructure/dtos/infrastructur
 import { AgricultureCreateDTO } from '../../argiculture/dtos/argiculture-create.dto';
 import { EducationCreateDTO } from '../../education/dtos/education-create.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { Religion } from 'src/religion/religion.entity';
+import { Sport } from 'src/sport/sport.entity';
+import { Transport } from 'src/transport/transport.entity';
+import { Place } from 'src/place/place.entity';
 
 export class FullCommunityCreateDTO {
   @ApiProperty({ example: 'Ужгородська громада' })
@@ -129,4 +133,61 @@ export class FullCommunityCreateDTO {
   @ValidateNested({ each: true })
   @Type(() => EducationCreateDTO)
   education_places: EducationCreateDTO[];
+
+  @ApiProperty({ example: 5224 })
+  @IsOptional()
+  population_amount?: number;
+
+  @ApiProperty({ example: 1895 })
+  @IsOptional()
+  @IsString()
+  established?: number;
+
+  @ApiProperty({ example: 42.7 })
+  @IsOptional()
+  area_km2?: number;
+
+  @ApiProperty({ example: 'Ужгород' })
+  @IsOptional()
+  @IsString()
+  center?: {
+    latitude: number;
+    longitude: number;
+  };
+
+  @ApiProperty({ example: ['Площа Шандора Петефі', 'Ужгородський замок'] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Place)
+  keyPlaces?: Place[];
+
+  @ApiProperty({ example: { lat: 48.62, lng: 22.3 } })
+  @IsOptional()
+  coordinates?: Array<{
+    latitude: number;
+    longitude: number;
+  }>;
+
+  @ApiProperty({
+    example: 'Громада розташована на заході України в Закарпатті.',
+  })
+  @IsOptional()
+  @IsString()
+  geography_description?: string;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => Religion)
+  religion?: Religion;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => Sport)
+  sport?: Sport;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => Transport)
+  transport?: Transport;
 }

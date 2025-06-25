@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsInt, IsNumber } from 'class-validator';
+import { IsBoolean, IsNumber } from 'class-validator';
 
 export class InfrastructureCreateDTO {
   @ApiProperty({ example: true })
@@ -18,7 +18,27 @@ export class InfrastructureCreateDTO {
   @IsNumber()
   stations: number;
 
-  @ApiProperty({ example: 1 })
-  @IsInt()
-  communityId: number;
+  @ApiProperty({ example: 45 })
+  @IsNumber()
+  markets: number;
+
+  @ApiProperty({ example: 45 })
+  @IsNumber()
+  shoppingCenters: number;
+
+  @ApiProperty({ example: 45 })
+  @IsNumber()
+  supermarkets: number;
+
+  @ApiProperty({ example: 45 })
+  @IsNumber()
+  restaurants: number;
+
+  @ApiProperty({ example: 45 })
+  @IsNumber()
+  cafes: number;
+
+  @ApiProperty({ example: 45 })
+  @IsNumber()
+  hotels: number;
 }

@@ -33,19 +33,9 @@ export class GeographyRepository {
   }
 
   async createGeography(geography: GeographyCreateDTO): Promise<Geography> {
-    const community = await this.communityRepo.findById(geography.communityId);
+    const newGeography = this.geographyReposity.create(geography);
 
-    if (!community) {
-      throw new NotFoundException('Community not found');
-    }
-
-    const newGeography = this.geographyReposity.create({
-      name: geography.name,
-      category: geography.category,
-      community,
-    });
-
-    return await this.geographyReposity.save(newGeography);
+    return this.geographyReposity.save(newGeography);
   }
 
   async saveGeography(geography: Geography): Promise<Geography> {

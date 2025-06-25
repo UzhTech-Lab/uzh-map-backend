@@ -17,8 +17,38 @@ export class InfrastructureUpdateDTO {
   @IsBoolean()
   busses: boolean;
 
-  @ApiProperty({ example: true })
+  @ApiProperty({ example: 3 })
   @IsOptional()
   @IsNumber()
   stations: number;
+
+  @ApiProperty({ example: 45 })
+  @IsOptional()
+  @IsNumber()
+  markets: number;
+
+  @ApiProperty({ example: 45 })
+  @IsOptional()
+  @IsNumber()
+  shoppingCenters: number;
+
+  @ApiProperty({ example: 45 })
+  @IsOptional()
+  @IsNumber()
+  supermarkets: number;
+
+  @ApiProperty({ example: 45 })
+  @IsOptional()
+  @IsNumber()
+  restaurants: number;
+
+  @ApiProperty({ example: 45 })
+  @IsOptional()
+  @IsNumber()
+  cafes: number;
+
+  @ApiProperty({ example: 45 })
+  @IsOptional()
+  @IsNumber()
+  hotels: number;
 }

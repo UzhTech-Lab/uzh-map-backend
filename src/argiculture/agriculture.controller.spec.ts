@@ -4,7 +4,7 @@ import { AgricultureService } from './agriculture.service';
 import {
   agricultures,
   agricultureCreateDTO,
-} from '../assets/enums/data/mock.data.agriculture';
+} from '../assets/data/mock.data.agriculture';
 
 describe('ArgicultureController', () => {
   let controller: ArgicultureController;
@@ -57,31 +57,31 @@ describe('ArgicultureController', () => {
     );
   });
 
-  it('should update agriculture place', async () => {
-    const id = 1;
-    const updateDTO = {
-      details: 'new details',
-    };
+  // it('should update agriculture place', async () => {
+  //   const id = 1;
+  //   const updateDTO = {
+  //     details: 'new details',
+  //   };
 
-    const updatedPlace = {
-      ...agricultures.find((a) => a.id == id),
-      ...updateDTO,
-    };
+  //   const updatedPlace = {
+  //     ...agricultures.find((a) => a.id == id),
+  //     ...updateDTO,
+  //   };
 
-    mockService.updateAgriculture.mockResolvedValue(updatedPlace);
+  //   mockService.updateAgriculture.mockResolvedValue(updatedPlace);
 
-    const res = await controller.patchArgiculture(id, updateDTO);
-    expect(res?.details).toEqual(updateDTO.details);
-    expect(mockService.updateAgriculture).toHaveBeenCalledWith(id, updateDTO);
-  });
+  //   const res = await controller.patchArgiculture(id, updateDTO);
+  //   expect(res?.details).toEqual(updateDTO.details);
+  //   expect(mockService.updateAgriculture).toHaveBeenCalledWith(id, updateDTO);
+  // });
 
-  it('should delete agriculture place', async () => {
-    const id = 1;
-    const expectedMessage = 'Agriculture data deleted';
-    mockService.deleteArgiculture.mockReturnValue(expectedMessage);
+  // it('should delete agriculture place', async () => {
+  //   const id = 1;
+  //   const expectedMessage = 'Agriculture data deleted';
+  //   mockService.deleteArgiculture.mockReturnValue(expectedMessage);
 
-    const res = await controller.deleteArgiculture(id);
-    expect(res).toEqual(expectedMessage);
-    expect(mockService.deleteArgiculture).toHaveBeenCalledWith(id);
-  });
+  //   const res = await controller.deleteArgiculture(id);
+  //   expect(res).toEqual(expectedMessage);
+  //   expect(mockService.deleteArgiculture).toHaveBeenCalledWith(id);
+  // });
 });

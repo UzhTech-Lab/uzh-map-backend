@@ -17,6 +17,14 @@ import { EducationModule } from './education/education.module';
 import { GeographyModule } from './geography/geography.module';
 import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { PopulationModule } from './population/population.module';
+import { SportModule } from './sport/sport.module';
+import { TransportModule } from './transport/transport.module';
+import { ReligionModule } from './religion/religion.module';
+import { PlaceModule } from './place/place.module';
+import { Place } from './place/place.entity';
+import { Religion } from './religion/religion.entity';
+import { Transport } from './transport/transport.entity';
+import { Sport } from './sport/sport.entity';
 
 @Module({
   imports: [
@@ -28,7 +36,7 @@ import { PopulationModule } from './population/population.module';
       username: process.env.DB_USERNAME,
       password: String(process.env.DB_PASSWORD),
       database: process.env.DB_NAME,
-      synchronize: false,
+      synchronize: true,
       logging: true,
       entities: [
         Community,
@@ -38,6 +46,10 @@ import { PopulationModule } from './population/population.module';
         Education,
         Economy,
         Infrastructure,
+        Place,
+        Religion,
+        Transport,
+        Sport,
       ],
     }),
     CommunityModule,
@@ -47,6 +59,10 @@ import { PopulationModule } from './population/population.module';
     GeographyModule,
     InfrastructureModule,
     PopulationModule,
+    SportModule,
+    TransportModule,
+    ReligionModule,
+    PlaceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

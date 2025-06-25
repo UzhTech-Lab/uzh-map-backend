@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Community } from '../community/community.entity';
 
 @Entity()
@@ -6,14 +12,18 @@ export class Agriculture {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  name: string;
+  @Column({ nullable: true })
+  farmlandPercent: number;
 
-  @Column()
-  details: string;
+  @Column('text', { array: true, nullable: true })
+  mainCrops: string[];
 
-  @ManyToOne(() => Community, (community) => community.argiculture_places, {
+  @Column({ nullable: true })
+  organicFarms: number;
+
+  @OneToOne(() => Community, (community) => community.argiculture, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'community_id' })
   community: Community;
 }

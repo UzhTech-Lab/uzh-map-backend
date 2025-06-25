@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNumber } from 'class-validator';
+import { IsArray, IsNumber } from 'class-validator';
 
 export class EconomyCreateDTO {
   @ApiProperty({ example: 2316.9 })
@@ -18,7 +18,19 @@ export class EconomyCreateDTO {
   @IsNumber()
   enterprises_amount?: number;
 
-  @ApiProperty({ example: 1 })
-  @IsInt()
-  communityId: number;
+  @ApiProperty({ example: [] })
+  @IsArray()
+  industries?: string[];
+
+  @ApiProperty({ example: 78 })
+  @IsNumber()
+  companies?: number;
+
+  @ApiProperty({ example: 78 })
+  @IsNumber()
+  unemployment?: number;
+
+  @ApiProperty({ example: [] })
+  @IsArray()
+  majorEmployers?: string[];
 }

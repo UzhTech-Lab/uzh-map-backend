@@ -1,5 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsEmail, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsEmail,
+  IsNumber,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { Place } from 'src/place/place.entity';
+import { Type } from 'class-transformer';
 
 export class CommunityCreateDTO {
   @ApiProperty({ example: 'Ужгородська громада' })
@@ -26,7 +35,7 @@ export class CommunityCreateDTO {
   @IsString()
   postal_index: string;
 
-  @ApiProperty({ example: 'умr@rada-uzhgorod.gov.ua' })
+  @ApiProperty({ example: 'umr@rada-uzhgorod.gov.ua' })
   @IsEmail()
   email: string;
 
@@ -41,6 +50,7 @@ export class CommunityCreateDTO {
 
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   photos?: string[];
 
   @ApiProperty({
@@ -51,8 +61,56 @@ export class CommunityCreateDTO {
   history: string;
 
   @ApiProperty({
-    example: '["Ужгород"]',
+    example: ['Ужгород'],
   })
   @IsArray()
+  @IsString({ each: true })
   settlements: string[];
+
+  @ApiProperty({ example: 560311215 })
+  @IsOptional()
+  @IsNumber()
+  population_amount?: number;
+
+  @ApiProperty({ example: 1895 })
+  @IsOptional()
+  @IsNumber()
+  established?: number;
+
+  @ApiProperty({ example: 42.7 })
+  @IsOptional()
+  @IsNumber()
+  area_km2?: number;
+
+  @ApiProperty({ example: { latitude: 48.62, longitude: 22.3 } })
+  @IsOptional()
+  center?: {
+    latitude: number;
+    longitude: number;
+  };
+
+  @ApiProperty({ example: [{ name: 'Площа Шандора Петефі' }] })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Place)
+  keyPlaces?: Place[];
+
+  @ApiProperty({
+    example: [
+      { latitude: 48.62, longitude: 22.3 },
+      { latitude: 48.63, longitude: 22.31 },
+    ],
+  })
+  @IsOptional()
+  @IsArray()
+  coordinates?: Array<{
+    latitude: number;
+    longitude: number;
+  }>;
+
+  @ApiProperty({ example: 'Знаходиться вздовж річки Уж' })
+  @IsOptional()
+  @IsString()
+  geography_description?: string;
 }

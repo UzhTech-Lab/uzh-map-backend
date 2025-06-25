@@ -37,15 +37,7 @@ export class EducationRepository {
   async createEducationPlace(
     educationPlace: EducationCreateDTO,
   ): Promise<Education> {
-    const community = await this.communityRepo.findById(
-      educationPlace.communityId,
-    );
-
-    if (!community) {
-      throw new NotFoundException('Community not found');
-    }
     const place = this.educationRepository.create(educationPlace);
-    place.community = community;
 
     return await this.educationRepository.save(place);
   }

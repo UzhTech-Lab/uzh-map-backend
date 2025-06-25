@@ -24,6 +24,24 @@ export class Infrastructure {
   @Column()
   stations: number;
 
+  @Column()
+  markets: number;
+
+  @Column()
+  shoppingCenters: number;
+
+  @Column()
+  supermarkets: number;
+
+  @Column()
+  restaurants: number;
+
+  @Column()
+  cafes: number;
+
+  @Column()
+  hotels: number;
+
   @OneToOne(() => Community, (community) => community.infrastructure, {
     onDelete: 'CASCADE',
   })

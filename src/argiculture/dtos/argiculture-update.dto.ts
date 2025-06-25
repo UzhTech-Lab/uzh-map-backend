@@ -1,14 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { IsArray, IsInt, IsOptional } from 'class-validator';
 
 export class AgricultureUpdateDTO {
-  @ApiProperty({ example: 'Угіддя' })
   @IsOptional()
-  @IsString()
-  name?: string;
+  @ApiProperty({ example: 123 })
+  @IsInt()
+  farmlandPercent?: number;
 
-  @ApiProperty({ example: '2304 га' })
   @IsOptional()
-  @IsString()
-  details?: string;
+  @ApiProperty({ example: ['example object'] })
+  @IsArray()
+  mainCrops?: string[];
+
+  @ApiProperty({ example: 123 })
+  @IsOptional()
+  @IsInt()
+  organicFarms?: number;
 }

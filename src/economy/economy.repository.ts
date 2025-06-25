@@ -30,12 +30,7 @@ export class EconomyRepository {
   }
 
   async createEconomy(economy: EconomyCreateDTO): Promise<Economy> {
-    const community = await this.communityRepo.findById(economy.communityId);
-
-    if (!community) {
-      throw new NotFoundException('Community not found');
-    }
-    this.economyRepository.create({ ...economy, community: community });
+    this.economyRepository.create(economy);
 
     return this.economyRepository.save(economy);
   }

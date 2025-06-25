@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsOptional } from 'class-validator';
+import { IsArray, IsNumber, IsOptional } from 'class-validator';
 
 export class EconomyUpdateDTO {
   @IsOptional()
@@ -21,4 +21,20 @@ export class EconomyUpdateDTO {
   @ApiProperty({ example: 63 })
   @IsNumber()
   enterprises_amount?: number;
+
+  @ApiProperty({ example: [] })
+  @IsArray()
+  industries?: string[];
+
+  @ApiProperty({ example: 156 })
+  @IsNumber()
+  companies?: number;
+
+  @ApiProperty({ example: 780 })
+  @IsNumber()
+  unemployment?: number;
+
+  @ApiProperty({ example: [] })
+  @IsArray()
+  majorEmployers?: string[];
 }
