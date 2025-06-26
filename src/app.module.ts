@@ -28,7 +28,7 @@ import { Sport } from './sport/sport.entity';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: '.env.test.local', isGlobal: true }),
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,

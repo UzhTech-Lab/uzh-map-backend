@@ -13,6 +13,7 @@ import { EducationModule } from '../education/education.module';
 import { ReligionModule } from 'src/religion/religion.module';
 import { SportModule } from 'src/sport/sport.module';
 import { TransportModule } from 'src/transport/transport.module';
+import { PlaceModule } from 'src/place/place.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { TransportModule } from 'src/transport/transport.module';
     ReligionModule,
     SportModule,
     TransportModule,
+    PlaceModule,
   ],
   controllers: [CommunityController],
   providers: [CommunityService, CommunityRepository],

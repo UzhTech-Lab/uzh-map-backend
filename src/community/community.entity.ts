@@ -51,7 +51,9 @@ export class Community {
     longitude: number;
   };
 
-  @OneToMany(() => Place, (place) => place.community)
+  @OneToMany(() => Place, (place) => place.community, {
+    cascade: true,
+  })
   keyPlaces: Place[];
 
   @Column('json')

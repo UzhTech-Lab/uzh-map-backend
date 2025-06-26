@@ -13,6 +13,7 @@ import { EducationRepository } from '../education/education.repository';
 import { ReligionRepository } from '../religion/religion.repository';
 import { SportRepository } from '../sport/sport.repository';
 import { TransportRepository } from '../transport/transport.repository';
+import { PlaceRepository } from 'src/place/place.repository';
 
 @Injectable()
 export class CommunityService {
@@ -36,6 +37,8 @@ export class CommunityService {
     private readonly sportRepo: SportRepository,
 
     private readonly transportRepo: TransportRepository,
+
+    private readonly placeRepo: PlaceRepository,
   ) {}
 
   findAll(): Promise<Community[]> {
@@ -73,7 +76,7 @@ export class CommunityService {
       established: dto.established,
       area_km2: dto.area_km2,
       center: dto.center,
-      keyPlaces: dto.keyPlaces,
+      keyPlaces: [],
       coordinates: dto.coordinates,
       geography_description: dto.geography_description,
     };
@@ -81,43 +84,53 @@ export class CommunityService {
     const savedCommunity =
       await this.communityRepo.createCommunity(newCommunity);
 
-    for (const arg of dto.geography) {
-      const geographyPlace = await this.geographyRepo.createGeography({
-        ...arg,
-      });
-      geographyPlace.community = savedCommunity;
-      await this.geographyRepo.saveGeography(geographyPlace);
+    if (dto.keyPlaces) {
+      for (const placeDto of dto.keyPlaces) {
+        const place = await this.placeRepo.create({
+          ...placeDto,
+          community_id: savedCommunity.id,
+        });
+        await this.placeRepo.save(place);
+      }
     }
 
-    const population = await this.populationRepo.createPopulation({
-      ...dto.population,
-      communityId: savedCommunity.id,
-    });
-    population.community = savedCommunity;
-    await this.populationRepo.savePopulation(population);
+    if (dto.population) {
+      const population = await this.populationRepo.createPopulation({
+        ...dto.population,
+        communityId: savedCommunity.id,
+      });
+      population.community = savedCommunity;
+      await this.populationRepo.savePopulation(population);
+    }
 
-    const economy = await this.economyRepo.createEconomy({ ...dto.economy });
-    economy.community = savedCommunity;
-    await this.economyRepo.saveEconomy(economy);
+    if (dto.economy) {
+      const economy = await this.economyRepo.createEconomy({
+        ...dto.economy,
+      });
+      economy.community = savedCommunity;
+      await this.economyRepo.saveEconomy(economy);
+    }
 
-    const infrastructure = await this.infrastructureRepo.createInfrastucture({
-      ...dto.infrastructure,
-    });
-    infrastructure.community = savedCommunity;
-    await this.infrastructureRepo.saveInfrastructure(infrastructure);
+    if (dto.infrastructure) {
+      const infrastructure = await this.infrastructureRepo.createInfrastucture({
+        ...dto.infrastructure,
+      });
+      infrastructure.community = savedCommunity;
+      await this.infrastructureRepo.saveInfrastructure(infrastructure);
+    }
 
-    for (const arg of dto.argiculture) {
+    if (dto.argiculture) {
       const agriculture = await this.agricultureRepo.createAgriculture({
-        ...arg,
+        ...dto.argiculture,
         communityId: savedCommunity.id,
       });
       agriculture.community = savedCommunity;
       await this.agricultureRepo.saveArgiculture(agriculture);
     }
 
-    for (const edu of dto.education) {
+    if (dto.education) {
       const education = await this.educationRepo.createEducationPlace({
-        ...edu,
+        ...dto.education,
       });
       education.community = savedCommunity;
       await this.educationRepo.saveEducationPlace(education);

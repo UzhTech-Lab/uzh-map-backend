@@ -26,9 +26,4 @@ export class SportCreateDTO {
   @IsInt()
   @IsPositive()
   sportsClubs: number;
-
-  @ApiProperty({ example: 1, description: 'Community ID' })
-  @IsInt()
-  @IsPositive()
-  community_id: number;
 }

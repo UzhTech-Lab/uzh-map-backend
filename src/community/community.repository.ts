@@ -36,14 +36,18 @@ export class CommunityRepository {
   async findById(id: number): Promise<Community> {
     const community = await this.repo.findOne({
       where: { id },
-      relations: [
-        'geography',
-        'population',
-        'economy',
-        'infrastructure',
-        'argiculture',
-        'education',
-      ],
+      relations: {
+        geography: true,
+        population: true,
+        economy: true,
+        infrastructure: true,
+        keyPlaces: true,
+        argiculture: true,
+        education: true,
+        religion: true,
+        sport: true,
+        transport: true,
+      },
     });
     if (!community) throw new NotFoundException('Community not found');
     return community;

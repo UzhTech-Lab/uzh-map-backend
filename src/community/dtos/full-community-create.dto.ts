@@ -8,7 +8,6 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
-import { GeographyCreateDTO } from '../../geography/dtos/geography-create.dto';
 import { CreatePopulationDTO } from '../../population/dtos/population-create.dto';
 import { EconomyCreateDTO } from '../../economy/dtos/economy-create.dto';
 import { InfrastructureCreateDTO } from '../../infrastructure/dtos/infrastructure-create.dto';
@@ -130,13 +129,6 @@ export class FullCommunityCreateDTO {
   photos?: string[];
 
   @ApiProperty({
-    type: [GeographyCreateDTO],
-  })
-  @ValidateNested()
-  @Type(() => GeographyCreateDTO)
-  geography: GeographyCreateDTO[];
-
-  @ApiProperty({
     example: {
       amount: 5224,
       preschool_age: 384,
@@ -187,14 +179,14 @@ export class FullCommunityCreateDTO {
   })
   @ValidateNested({ each: true })
   @Type(() => AgricultureCreateDTO)
-  argiculture: AgricultureCreateDTO[];
+  argiculture: AgricultureCreateDTO;
 
   @ApiProperty({
     type: [EducationCreateDTO],
   })
   @ValidateNested({ each: true })
   @Type(() => EducationCreateDTO)
-  education: EducationCreateDTO[];
+  education: EducationCreateDTO;
 
   @IsOptional()
   @ValidateNested()
