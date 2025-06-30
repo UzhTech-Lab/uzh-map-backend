@@ -24,22 +24,22 @@ export class Infrastructure {
   @Column()
   stations: number;
 
-  @Column()
+  @Column({ nullable: true })
   markets: number;
 
-  @Column()
+  @Column({ nullable: true })
   shoppingCenters: number;
 
-  @Column()
+  @Column({ nullable: true })
   supermarkets: number;
 
-  @Column()
+  @Column({ nullable: true })
   restaurants: number;
 
-  @Column()
+  @Column({ nullable: true })
   cafes: number;
 
-  @Column()
+  @Column({ nullable: true })
   hotels: number;
 
   @OneToOne(() => Community, (community) => community.infrastructure, {

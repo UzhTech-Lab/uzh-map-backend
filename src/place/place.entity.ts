@@ -19,10 +19,10 @@ export class Place {
   @Column()
   address: string;
 
-  @Column()
+  @Column('float')
   latitude: number;
 
-  @Column()
+  @Column('float')
   longitude: number;
 
   @Column({ type: 'enum', enum: MarkerTypeEnum })

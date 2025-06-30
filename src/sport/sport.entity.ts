@@ -12,19 +12,19 @@ export class Sport {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   stadiums: number;
 
-  @Column()
+  @Column({ nullable: true })
   sportsCenters: number;
 
-  @Column()
+  @Column({ nullable: true })
   pools: number;
 
-  @Column()
+  @Column({ nullable: true })
   gyms: number;
 
-  @Column()
+  @Column({ nullable: true })
   sportsClubs: number;
 
   @OneToOne(() => Community, (community) => community.sport, {

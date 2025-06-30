@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Community } from './community.entity';
 import { CommunityCreateDTO } from './dtos/community-create.dto';
 import { CommunityUpdateDTO } from './dtos/community-update.dto';
+import { GetCommunityDTO } from './dtos/get-community.dto';
 
 @Injectable()
 export class CommunityRepository {
@@ -31,6 +32,32 @@ export class CommunityRepository {
 
   find(): Promise<Community[]> {
     return this.repo.find();
+  }
+
+  async findShortInfoById(id: number): Promise<GetCommunityDTO> {
+    const community = await this.repo.findOne({
+      where: { id },
+      relations: {
+        keyPlaces: true,
+      },
+    });
+    if (!community) throw new NotFoundException('Community not found');
+
+    const shortInfo = {
+      id: community.id,
+      name: community.name,
+      edrpou_code: community.edrpou_code,
+      region: community.region,
+      population_amount: community.population_amount,
+      established: community.established,
+      area_km2: community.area_km2,
+      district: community.district,
+      center_settlement: community.center_settlement,
+      center: community.center,
+      settlements: community.settlements,
+      keyPlaces: community.keyPlaces,
+    };
+    return shortInfo;
   }
 
   async findById(id: number): Promise<Community> {

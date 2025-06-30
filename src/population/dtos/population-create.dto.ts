@@ -56,5 +56,5 @@ export class CreatePopulationDTO {
 
   @ApiProperty({ example: 1 })
   @IsInt()
-  communityId: number;
+  community_id: number;
 }

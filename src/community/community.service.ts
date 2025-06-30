@@ -14,6 +14,7 @@ import { ReligionRepository } from '../religion/religion.repository';
 import { SportRepository } from '../sport/sport.repository';
 import { TransportRepository } from '../transport/transport.repository';
 import { PlaceRepository } from 'src/place/place.repository';
+import { GetCommunityDTO } from './dtos/get-community.dto';
 
 @Injectable()
 export class CommunityService {
@@ -48,6 +49,10 @@ export class CommunityService {
   async getNames(): Promise<{ id: number; name: string }[]> {
     const communities = await this.communityRepo.find();
     return communities.map(({ id, name }) => ({ id, name }));
+  }
+
+  async findShortInfo(id: number): Promise<GetCommunityDTO> {
+    return await this.communityRepo.findShortInfoById(id);
   }
 
   findById(id: number): Promise<Community> {
@@ -97,7 +102,7 @@ export class CommunityService {
     if (dto.population) {
       const population = await this.populationRepo.createPopulation({
         ...dto.population,
-        communityId: savedCommunity.id,
+        community_id: savedCommunity.id,
       });
       population.community = savedCommunity;
       await this.populationRepo.savePopulation(population);
@@ -122,7 +127,7 @@ export class CommunityService {
     if (dto.argiculture) {
       const agriculture = await this.agricultureRepo.createAgriculture({
         ...dto.argiculture,
-        communityId: savedCommunity.id,
+        community_id: savedCommunity.id,
       });
       agriculture.community = savedCommunity;
       await this.agricultureRepo.saveArgiculture(agriculture);

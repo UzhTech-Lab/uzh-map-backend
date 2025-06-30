@@ -26,7 +26,9 @@ export class PopulationRepository {
   }
 
   async createPopulation(population: CreatePopulationDTO): Promise<Population> {
-    const community = await this.communityRepo.findById(population.communityId);
+    const community = await this.communityRepo.findById(
+      population.community_id,
+    );
 
     if (!community) throw new NotFoundException('Community not found');
 

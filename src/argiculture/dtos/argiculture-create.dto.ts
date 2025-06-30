@@ -16,5 +16,5 @@ export class AgricultureCreateDTO {
 
   @ApiProperty({ example: 1 })
   @IsInt()
-  communityId: number;
+  community_id: number;
 }

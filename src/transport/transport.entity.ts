@@ -12,22 +12,22 @@ export class Transport {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   airports: number;
 
-  @Column()
+  @Column({ nullable: true })
   railwayStations: number;
 
-  @Column()
+  @Column({ nullable: true })
   busRoutes: number;
 
-  @Column('text', { array: true })
+  @Column('text', { array: true, nullable: true })
   highways: string[];
 
-  @Column()
+  @Column({ nullable: true })
   borderCrossings: number;
 
-  @Column() bikeRoutes: number;
+  @Column({ nullable: true }) bikeRoutes: number;
 
   @OneToOne(() => Community, (community) => community.transport, {
     onDelete: 'CASCADE',

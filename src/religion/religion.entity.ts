@@ -12,17 +12,17 @@ export class Religion {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('jsonb')
+  @Column('jsonb', { nullable: true })
   churches: {
     orthodox: number;
     catholic: number;
     protestant: number;
     total: number;
   };
-  @Column()
+  @Column({ nullable: true })
   monuments: number;
 
-  @Column()
+  @Column({ nullable: true })
   museums: number;
 
   @OneToOne(() => Community, (community) => community.religion, {

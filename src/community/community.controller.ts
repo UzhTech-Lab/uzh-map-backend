@@ -21,6 +21,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { GetCommunityDTO } from './dtos/get-community.dto';
 
 @ApiTags('Community')
 @Controller('api/v1/community')
@@ -73,6 +74,26 @@ export class CommunityController {
   async findById(@Param('id', ParseIntPipe) id: number): Promise<Community> {
     try {
       return this.communityService.findById(id);
+    } catch (error) {
+      throw new BadRequestException(
+        error.message || 'Error during getting community ',
+      );
+    }
+  }
+
+  @Get('info/:id')
+  @ApiOperation({ summary: 'Receive short information about community by ID' })
+  @ApiParam({ name: 'id', type: Number, description: 'Community ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Received some community with short information about it',
+    type: Community,
+  })
+  async getShortInfo(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<GetCommunityDTO> {
+    try {
+      return this.communityService.findShortInfo(id);
     } catch (error) {
       throw new BadRequestException(
         error.message || 'Error during getting community ',
