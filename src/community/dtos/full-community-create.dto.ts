@@ -4,6 +4,8 @@ import {
   IsOptional,
   IsArray,
   ValidateNested,
+  IsNumber,
+  IsObject,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -14,6 +16,7 @@ import { InfrastructureCreateDTO } from '../../infrastructure/dtos/infrastructur
 import { AgricultureCreateDTO } from '../../argiculture/dtos/argiculture-create.dto';
 import { EducationCreateDTO } from '../../education/dtos/education-create.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { Center } from '../community.entity';
 
 export class FullCommunityCreateDTO {
   @ApiProperty({ example: 'Ужгородська громада' })
@@ -52,6 +55,36 @@ export class FullCommunityCreateDTO {
   @IsOptional()
   @IsString()
   website?: string;
+
+  @ApiProperty({ example: 1235 })
+  @IsNumber()
+  population_amount: number;
+
+  @ApiProperty({ example: 1235 })
+  @IsNumber()
+  established: number;
+
+  @ApiProperty({ example: 1235 })
+  @IsNumber()
+  area_km2: number;
+
+  @ApiProperty({
+    example:
+      'Громада утворилась на базі лише одного населеного пункту – міста Ужгорода',
+  })
+  @IsString()
+  geography_description: string;
+
+  @IsObject()
+  center: Center;
+
+  @IsArray()
+  @IsArray({ each: true })
+  @IsArray({ each: true })
+  coordinates: [number, number][][];
+
+  @ApiProperty()
+  keyPlaces: string[];
 
   @IsOptional()
   @IsArray()

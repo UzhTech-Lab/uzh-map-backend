@@ -12,6 +12,18 @@ export class Economy {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true })
+  industries: number;
+
+  @Column({ nullable: true })
+  companies: number;
+
+  @Column({ nullable: true })
+  unemployment: number;
+
+  @Column({ nullable: true })
+  majorEmployers: number;
+
   @Column('float', { nullable: true })
   budget: number | null;
 

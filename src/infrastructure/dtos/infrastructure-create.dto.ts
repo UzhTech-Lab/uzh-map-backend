@@ -21,4 +21,28 @@ export class InfrastructureCreateDTO {
   @ApiProperty({ example: 1 })
   @IsInt()
   communityId: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  markets: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  shoppingCenters: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  supermarkets: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  restaurants: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  cafes: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  hotels: number;
 }

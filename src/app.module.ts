@@ -17,6 +17,7 @@ import { EducationModule } from './education/education.module';
 import { GeographyModule } from './geography/geography.module';
 import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { PopulationModule } from './population/population.module';
+import { SeedService } from '../seed/seed.service';
 
 @Module({
   imports: [
@@ -49,6 +50,6 @@ import { PopulationModule } from './population/population.module';
     PopulationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SeedService],
 })
 export class AppModule {}

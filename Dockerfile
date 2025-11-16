@@ -24,6 +24,7 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/seed ./seed 
 
 # Set environment variable if needed
 ENV NODE_ENV=production
@@ -32,4 +33,4 @@ ENV NODE_ENV=production
 EXPOSE 5000
 
 # Start command
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/src/main.js"]

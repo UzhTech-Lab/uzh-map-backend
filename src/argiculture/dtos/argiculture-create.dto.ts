@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsNumber, IsString } from 'class-validator';
 
 export class AgricultureCreateDTO {
   @ApiProperty({ example: 'Угіддя' })
@@ -13,4 +13,16 @@ export class AgricultureCreateDTO {
   @ApiProperty({ example: 1 })
   @IsInt()
   communityId: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  farmlandPercent: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  mainCrops: number;
+
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  organicFarms: number;
 }

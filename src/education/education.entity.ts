@@ -10,6 +10,21 @@ export class Education {
   @Column()
   name: string;
 
+  @Column({ nullable: true })
+  hospitals: number;
+
+  @Column({ nullable: true })
+  schools: number;
+
+  @Column({ nullable: true })
+  universities: number;
+
+  @Column({ nullable: true })
+  libraries: number;
+
+  @Column({ nullable: true })
+  theaters: number;
+
   @Column({ type: 'enum', enum: Categories })
   category: Categories;
 

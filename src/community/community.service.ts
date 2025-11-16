@@ -60,6 +60,13 @@ export class CommunityService {
       photos: dto.photos,
       history: dto.history,
       settlements: dto.settlements,
+      population_amount: dto.population_amount,
+      established: dto.established,
+      area_km2: dto.area_km2,
+      center: dto.center,
+      geography_description: dto.geography_description,
+      coordinates: dto.coordinates,
+      keyPlaces: dto.keyPlaces,
     };
 
     const savedCommunity =

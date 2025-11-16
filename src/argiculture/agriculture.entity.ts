@@ -10,6 +10,15 @@ export class Agriculture {
   name: string;
 
   @Column()
+  farmlandPercent: number;
+
+  @Column()
+  mainCrops: number;
+
+  @Column()
+  organicFarms: number;
+
+  @Column()
   details: string;
 
   @ManyToOne(() => Community, (community) => community.argiculture_places, {

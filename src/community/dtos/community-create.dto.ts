@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsEmail, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsEmail,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { Center } from '../community.entity';
 
 export class CommunityCreateDTO {
   @ApiProperty({ example: 'Ужгородська громада' })
@@ -13,6 +21,34 @@ export class CommunityCreateDTO {
   @ApiProperty({ example: 'Закарпатська область' })
   @IsString()
   region: string;
+
+  @ApiProperty({ example: 1235 })
+  @IsNumber()
+  population_amount: number;
+
+  @ApiProperty({ example: 1235 })
+  @IsNumber()
+  established: number;
+
+  @ApiProperty({ example: 1235 })
+  @IsNumber()
+  area_km2: number;
+
+  @IsArray()
+  coordinates: [number, number][][];
+
+  @ApiProperty()
+  keyPlaces: string[];
+
+  @ApiProperty({
+    example:
+      'Громада утворилась на базі лише одного населеного пункту – міста Ужгорода',
+  })
+  @IsNumber()
+  geography_description: string;
+
+  @IsObject()
+  center: Center;
 
   @ApiProperty({ example: 'Ужгородський район' })
   @IsString()

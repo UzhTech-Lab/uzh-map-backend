@@ -1,35 +1,35 @@
-# docker-compose.yml
-version: '3.8'
-
 services:
-  backend:
-    # Build the Docker image from the local Dockerfile
-    build: .
-    ports:
-      - 5000:5000
-    # Load environment variables from .env
-    env_file:
-      - .env
-    # Override or add variables if necessary
-    environment:
-      NODE_ENV: ${NODE_ENV:-production}
-    # Ensure the database is started before the backend
-    depends_on:
-      - db
-
   db:
-    # Use the official Postgres image
     image: postgres:15
-    # Configure database credentials from .env
+    container_name: uzh-map-backend-db
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
-    # Expose the database port to the host if needed
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: uzh_map
     ports:
-      - '${DB_PORT}:5432'
+      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 2s
+      retries: 20
+
+  backend:
+    build: .
+    container_name: uzh-map-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: uzh_map
+    ports:
+      - "5000:3000"
 
 volumes:
   db_data:
